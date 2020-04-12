@@ -37,18 +37,34 @@ public:
 			scene.SetCamera( pCamera );
 		}
 
-		// Object #1 - Earth
+		// Object #1 - Cube Map
 		{
 			Object * pObject1 = new Object();
 
 			pObject1->m_pMesh		= new MeshSphere(30);
 			pObject1->m_pTransform	= new Transform(0,0,0, 0,0,0, 1,1,1);
+			/*pObject1->m_pMaterial = new SkyboxMaterial(
+				Vector3(0, 0, 0),
+				TEXTURE_FILTER_MODE_TRILINEAR,
+				"ShaderCube",
+				"ShaderCube",
+				"Earth_Albedo.jpg"
+			);*/
+			TextureFilenames texture_filenames{
+			"Space_down.jpg",
+			"Space_up.jpg",
+			"Space_left.jpg",
+			"Space_right.jpg",
+			"Space_front.jpg",
+			"Space_back.jpg",
+			};
 			pObject1->m_pMaterial = new SkyboxMaterial(
 				Vector3(0, 0, 0),
 				TEXTURE_FILTER_MODE_TRILINEAR,
-				"ShaderEarth",
-				"ShaderEarth",
-				"Earth_Albedo.jpg"
+				"ShaderCube",
+				"ShaderCube",
+				"Earth_Albedo.jpg",
+				texture_filenames
 			);
 			pObject1->AddComponent( new ObjectRotator(0, 30, 0) );
 						

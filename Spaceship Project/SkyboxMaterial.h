@@ -1,5 +1,6 @@
 #pragma once
 #include "GraphicsEngine/Materials/Material.h"
+#include "Spaceship Project/TextureFilenames.h" 
 
 
 /**
@@ -19,11 +20,21 @@ public:
 	SkyboxMaterial(const SkyboxMaterial&) = delete;
 	SkyboxMaterial
 	(
-		const Vector3 & color, 
-		const TextureFilterMode filter_mode, 
+		const Vector3 & color,
+		const TextureFilterMode filter_mode,
 		const std::string& v_shader_name,
 		const std::string& p_shader_name,
 		const std::string& texture_jpg_filename
+	);
+
+	SkyboxMaterial
+	(
+		const Vector3 & color,
+		const TextureFilterMode filter_mode,
+		const std::string& v_shader_name,
+		const std::string& p_shader_name,
+		const std::string& texture_jpg_filename,
+		const TextureFilenames& filenames_pack
 	);
 
 	/**
@@ -50,10 +61,28 @@ private:
 	* @brief The color of the object.
 	* This material draws the object in one color.
 	*/
-	
+	void init_cube_textures();
+
 	Vector4 m_color;
 	Texture2D *	PlanetTexture = nullptr;
 	TextureFilterMode FilterMode;
 	std::string texture_jpg_filename = "";
+
+	/*std::string TextureBottomFilename = "";
+	std::string TextureUpFilename = "";
+	std::string TextureLeftFilename = "";
+	std::string TextureRightFilename = "";
+	std::string TextureFrontFilename = "";
+	std::string TextureBackFilename = "";*/
+
+	TextureFilenames filenames;
+
+	Texture2D *	TextureBottom = nullptr;
+	Texture2D *	TextureUp = nullptr;
+	Texture2D *	TextureLeft = nullptr;
+	Texture2D *	TextureRight = nullptr;
+	Texture2D *	TextureFront = nullptr;
+	Texture2D *	TextureBack = nullptr;
+
 };
 
