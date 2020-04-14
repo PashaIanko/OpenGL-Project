@@ -43,14 +43,20 @@ void main()
 	uv1				= texcoord0.xy;
 
 
-	texture_flag = 0.0;
-	if(gl_Position.x > 0.0) // (1!=1)
-	{
-		texture_flag = 1.0;
-	}
-
+	texture_flag = 1.0;
 	/*if(gl_Position.x > 0.0) // (1!=1)
 	{
+		texture_flag = 1.0;
+	}*/
+
+	float x = gl_Position.x;
+	float y = gl_Position.y;
+	float z = gl_Position.z;
+
+
+/*	if(y > 0.0)
+	{
+		//running through the front image - https://www.youtube.com/watch?v=QYvi1akO_Po
 		texture_flag = 1.0;
 	}*/
 

@@ -26,8 +26,8 @@ public:
 	{
 		Scene & scene = Application::Instance().GetScene();
 	
-		// Camera
-		{
+		// Camera - Предыдущий код
+		/*{
 			Object * pCameraObj = new Object();
 			pCameraObj->m_pTransform = new Transform( Vector3(0.0f, 0.0f,-2.5f),
 				Vector3(0.0f, 0.0f, 0.0f));
@@ -35,6 +35,23 @@ public:
 			pCameraObj->AddComponent( pCamera );
 
 			scene.SetCamera( pCamera );
+		}*/
+
+		{
+			Camera* pCamera = new Camera();
+
+			// Тело - у него родительский Transform. Rotation и Translation --> Должны вызывать Rotate и Translate у РОДИТЕЛЬСКОГО Transform
+			Vector3 CamPos = Vector3(0.0f, 0.0f, 0.0f);//Vector3(0.0f, 0.5f, -5.0f);
+			Vector3 CamScale = Vector3(20.0f, 10.0f, 0.0f);
+
+			Object* BodyObj = new Object();
+			BodyObj->m_pTransform = new Transform(CamPos, CamScale);
+			BodyObj->AddComponent(pCamera);
+
+			CameraController * pCamCtrl = new CameraController(CamPos, CamScale);
+			BodyObj->AddComponent(pCamCtrl);
+			scene.SetCamera(pCamera);
+
 		}
 
 		// Object #1 - Cube Map
@@ -42,7 +59,8 @@ public:
 			Object * pObject1 = new Object();
 
 			pObject1->m_pMesh = new MeshCube();// MeshSphere(30);
-			pObject1->m_pTransform	= new Transform(0,0,0, 0,0,0, 1,1,1);
+			const int universe_scale = -3;
+			pObject1->m_pTransform	= new Transform(0,0,0, 0,0,0, universe_scale, universe_scale, universe_scale);
 			
 			TextureFilenames texture_filenames{
 			"Space_down.jpg",
@@ -68,7 +86,7 @@ public:
 				"Earth_Albedo.jpg",
 				/*texture_filenames*/ texture_filenames_test
 			);
-			pObject1->AddComponent( new ObjectRotator(0, 80, 0) );
+			//pObject1->AddComponent( new ObjectRotator(0, 80, 0) );
 						
 			scene.AddObject( pObject1 );
 		}
@@ -86,6 +104,17 @@ public:
 
 			scene.AddLight(pLight);
 		}
+
+		unsigned char UP = 'w';
+		unsigned char DOWN = 's';
+		unsigned char LEFT = 'a';
+		unsigned char RIGHT = 'd';
+		unsigned char ACCELERATE = 'z';
+		GL20Input::SetLetterKeyUp(UP);
+		GL20Input::SetLetterKeyUp(DOWN);
+		GL20Input::SetLetterKeyUp(LEFT);
+		GL20Input::SetLetterKeyUp(RIGHT);
+		GL20Input::SetLetterKeyUp(ACCELERATE);
 	}
 
 	virtual void Update()
