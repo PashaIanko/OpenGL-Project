@@ -75,6 +75,13 @@ void SkyboxMaterial::SetMaterial(const Object * pObject)
 		//Passing textures
 		SetPixelShaderTexture2d("textureEarth", PlanetTexture);
 
+		SetPixelShaderTexture2d("TextureSpaceUp", TextureUp);
+		SetPixelShaderTexture2d("TextureSpaceBottom", TextureBottom);
+		SetPixelShaderTexture2d("TextureSpaceLeft", TextureLeft);
+		SetPixelShaderTexture2d("TextureSpaceRight", TextureRight);
+		SetPixelShaderTexture2d("TextureSpaceFront", TextureFront);
+		SetPixelShaderTexture2d("TextureSpaceBack", TextureBack);
+
 		
 		//Passing Cube Textures
 		/*SetPixelShaderTexture2d("TextureUp", this->TextureUp);
