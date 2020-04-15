@@ -8,7 +8,8 @@
 #include "GraphicsEngine/GraphicsEngine.h"
 #include "GraphicsEngine/Light.h"
 
-#include "Spaceship Project/SkyboxMaterial.h"
+#include "Spaceship Project/SkyboxTaskNew/Skybox.h"
+//#include "Spaceship Project/TextureFilenames.h"
 #include "Tasks/Task.h"
 
 
@@ -16,25 +17,14 @@
 * @brief Shows how to write bumped material.
 * Key code is situated in the class MaterialBumpedSpecular.
 */
-class SkyboxTask: public Task
+class SkyboxTaskNew: public Task
 {
 public:
-	virtual ~SkyboxTask() { }
+	virtual ~SkyboxTaskNew() { }
 
 	virtual void Init()
 	{
 		Scene & scene = Application::Instance().GetScene();
-	
-		// Camera - Предыдущий код
-		/*{
-			Object * pCameraObj = new Object();
-			pCameraObj->m_pTransform = new Transform( Vector3(0.0f, 0.0f,-2.5f),
-				Vector3(0.0f, 0.0f, 0.0f));
-			Camera * pCamera = new Camera();
-			pCameraObj->AddComponent( pCamera );
-
-			scene.SetCamera( pCamera );
-		}*/
 
 		{
 			Camera* pCamera = new Camera();
@@ -53,22 +43,8 @@ public:
 
 		}
 
-		// Object #1 - Cube Map
 		{
-			Object * pObject1 = new Object();
-
-			pObject1->m_pMesh = new MeshCube();// MeshSphere(30);
-			const int universe_scale = -3;
-			pObject1->m_pTransform	= new Transform(0,0,0, 0,0,0, universe_scale, universe_scale, universe_scale);
-			
-			TextureFilenames texture_filenames{
-			"Space_down.jpg",
-			"Space_up.jpg",
-			"Space_left.jpg",
-			"Space_right.jpg",
-			"Space_front.jpg",
-			"Space_back.jpg",
-			};
+			//Skybox
 			TextureFilenames texture_filenames_test{
 			"Space_down_test.jpg",
 			"Space_up_test.jpg",
@@ -77,17 +53,19 @@ public:
 			"Space_front_test.jpg",
 			"Space_back_test.jpg",
 			};
-			pObject1->m_pMaterial = new SkyboxMaterial(
-				Vector3(0, 0, 0),
-				TEXTURE_FILTER_MODE_TRILINEAR,
-				"ShaderCube",
-				"ShaderCube",
-				"Earth_Albedo.jpg",
-				/*texture_filenames*/ texture_filenames_test
-			);
-			//pObject1->AddComponent( new ObjectRotator(0, 80, 0) );
-						
-			scene.AddObject( pObject1 );
+			TextureFilenames texture_filenames{
+			"Space_down.jpg",
+			"Space_up.jpg",
+			"Space_left.jpg",
+			"Space_right.jpg",
+			"Space_front.jpg",
+			"Space_back.jpg",
+			};
+
+			Object* SkyObject = new Object();
+			SkyObject->m_pTransform = new Transform(0, 0, 0, 0, 0, 0, 1, 1, 1);
+			SkyObject->AddComponent(new Skybox(texture_filenames));
+			scene.AddObject(SkyObject);
 		}
 
 		// Light source #1 - Directional
