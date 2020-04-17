@@ -1,5 +1,6 @@
 #pragma once
 #include "GraphicsEngine/Materials/Material.h"
+#include "GraphicsEngine/GraphicsApi/OpenGL20/GL20GraphicsDevice.h"
 
 /**
 * @brief Unlit material class doesn't take into account light sources. Draws the object in one color.
@@ -22,7 +23,10 @@ public:
 		const TextureFilterMode filter_mode,
 		const std::string& v_shader_name,
 		const std::string& p_shader_name,
-		const std::string& texture_jpg_filename
+		const std::string& texture_jpg_filename,
+		const int render_queue
+		
+		// Необходимо render queue указать
 	);
 
 
@@ -42,6 +46,7 @@ public:
 	*/
 	virtual void SetMaterial(const Object * pObject);
 
+	virtual void ResetMaterial() override; 
 
 
 private:
@@ -54,6 +59,7 @@ private:
 	Texture2D *	Texture = nullptr;
 	TextureFilterMode FilterMode;
 	std::string texture_jpg_filename = "";
+	GL20GraphicsDevice graphics_device{};
 
 };
 

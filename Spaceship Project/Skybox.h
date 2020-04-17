@@ -2,13 +2,13 @@
 #include "Tasks/ObjectRotator.h"
 #include "GraphicsEngine/Application.h"
 #include "GraphicsEngine/Meshes/MeshSphere.h"
+#include "GraphicsEngine/Meshes/MeshQuad.h"
 #include "GraphicsEngine/Transform.h"
 #include "GraphicsEngine/Object.h"
 #include "GraphicsEngine/Scene.h"
 #include "GraphicsEngine/GraphicsEngine.h"
 #include "GraphicsEngine/Light.h"
 
-//#include "Spaceship Project/TextureFilenames.h"
 #include "Spaceship Project/SkyboxTaskNew/SkyboxMaterialNew.h"
 #include "Tasks/Task.h"
 
@@ -43,98 +43,122 @@ public:
 
 		//Front
 		{
-			Object * pObject = new Object();
-			pObject->m_pMesh = new MeshQuad();
-			pObject->m_pTransform = new Transform(0, 0, dist_from_center, -90, 0, 0, cube_size, cube_size, cube_size);
-			pObject->m_pMaterial = new SkyboxMaterialNew(
+			front = new Object();
+			//front 
+			front->m_pMesh = new MeshQuad();
+			front->m_pTransform = new Transform(0, 0, dist_from_center, -90, 0, 0, cube_size, cube_size, cube_size);
+			front->m_pMaterial = new SkyboxMaterialNew(
 				Vector3(0, 0, 0),
 				TEXTURE_FILTER_MODE_TRILINEAR,
 				"ShaderSkyboxNew",
 				"ShaderSkyboxNew",
-				texture_filenames.front
+				texture_filenames.front,
+				RenderQueue::SKYBOX
 			);
-			scene.AddObject(pObject);
+			scene.AddObject(front);
 		}
 
 		//Back
 		{
-			Object * pObject = new Object();
-			pObject->m_pMesh = new MeshQuad();
-			pObject->m_pTransform = new Transform(0, 0, -dist_from_center, 90, 0, 0, cube_size, cube_size, cube_size);
-			pObject->m_pMaterial = new SkyboxMaterialNew(
+			back = new Object();
+			back->m_pMesh = new MeshQuad();
+			back->m_pTransform = new Transform(0, 0, -dist_from_center, 90, 0, 0, cube_size, cube_size, cube_size);
+			back->m_pMaterial = new SkyboxMaterialNew(
 				Vector3(0, 0, 0),
 				TEXTURE_FILTER_MODE_TRILINEAR,
 				"ShaderSkyboxNew",
 				"ShaderSkyboxNew",
-				texture_filenames.back
+				texture_filenames.back,
+				RenderQueue::SKYBOX
 			);
-			scene.AddObject(pObject);
+			scene.AddObject(back);
 		}
 
 		//left
 		{
-			Object * pObject = new Object();
-			pObject->m_pMesh = new MeshQuad();
-			pObject->m_pTransform = new Transform(-dist_from_center, 0, 0, 0, 0, -90, cube_size, cube_size, cube_size);
-			pObject->m_pMaterial = new SkyboxMaterialNew(
+			left = new Object();
+			left->m_pMesh = new MeshQuad();
+			left->m_pTransform = new Transform(-dist_from_center, 0, 0, 0, 0, -90, cube_size, cube_size, cube_size);
+			left->m_pMaterial = new SkyboxMaterialNew(
 				Vector3(0, 0, 0),
 				TEXTURE_FILTER_MODE_TRILINEAR,
 				"ShaderSkyboxNew",
 				"ShaderSkyboxNew",
-				texture_filenames.left
+				texture_filenames.left,
+				RenderQueue::SKYBOX
 			);
-			scene.AddObject(pObject);
+			scene.AddObject(left);
 		}
 
 		////right
 		{
-			Object * pObject = new Object();
-			pObject->m_pMesh = new MeshQuad();
-			pObject->m_pTransform = new Transform(dist_from_center, 0, 0, 0, 0, 90, cube_size, cube_size, cube_size);
-			pObject->m_pMaterial = new SkyboxMaterialNew(
+			right = new Object();
+			right->m_pMesh = new MeshQuad();
+			right->m_pTransform = new Transform(dist_from_center, 0, 0, 0, 0, 90, cube_size, cube_size, cube_size);
+			right->m_pMaterial = new SkyboxMaterialNew(
 				Vector3(0, 0, 0),
 				TEXTURE_FILTER_MODE_TRILINEAR,
 				"ShaderSkyboxNew",
 				"ShaderSkyboxNew",
-				texture_filenames.right
+				texture_filenames.right,
+				RenderQueue::SKYBOX
 			);
-			scene.AddObject(pObject);
+			scene.AddObject(right);
 		}
 
 		//top
 		{
-			Object * pObject = new Object();
-			pObject->m_pMesh = new MeshQuad();
-			pObject->m_pTransform = new Transform(0, dist_from_center, 0, 0, 0, 180, cube_size, cube_size, cube_size);
-			pObject->m_pMaterial = new SkyboxMaterialNew(
+			up = new Object();
+			up->m_pMesh = new MeshQuad();
+			up->m_pTransform = new Transform(0, dist_from_center, 0, 0, 0, 180, cube_size, cube_size, cube_size);
+			up->m_pMaterial = new SkyboxMaterialNew(
 				Vector3(0, 0, 0),
 				TEXTURE_FILTER_MODE_TRILINEAR,
 				"ShaderSkyboxNew",
 				"ShaderSkyboxNew",
-				texture_filenames.up
+				texture_filenames.up,
+				RenderQueue::SKYBOX
 			);
-			scene.AddObject(pObject);
+			scene.AddObject(up);
 		}
 
 		////bottom
 		{
-			Object * pObject = new Object();
-			pObject->m_pMesh = new MeshQuad();
-			pObject->m_pTransform = new Transform(0, -dist_from_center, 0, 0, 0, 0, cube_size, cube_size, cube_size);
-			pObject->m_pMaterial = new SkyboxMaterialNew(
+			bottom = new Object();
+			bottom->m_pMesh = new MeshQuad();
+			bottom->m_pTransform = new Transform(0, -dist_from_center, 0, 0, 0, 0, cube_size, cube_size, cube_size);
+			bottom->m_pMaterial = new SkyboxMaterialNew(
 				Vector3(0, 0, 0),
 				TEXTURE_FILTER_MODE_TRILINEAR,
 				"ShaderSkyboxNew",
 				"ShaderSkyboxNew",
-				texture_filenames.bottom
+				texture_filenames.bottom,
+				RenderQueue::SKYBOX
 			);
-			scene.AddObject(pObject);
+			scene.AddObject(bottom);
 		}
 
 
 
 	}
 
+	void Translate(Vector3 vec)
+	{
+		up->m_pTransform->Translate(vec);
+		bottom->m_pTransform->Translate(vec);
+		left->m_pTransform->Translate(vec);
+		right->m_pTransform->Translate(vec);
+		front->m_pTransform->Translate(vec);
+		back->m_pTransform->Translate(vec);
+	}
+
 private:
 	TextureFilenames texture_filenames{};
+
+	Object* up = nullptr;
+	Object* bottom = nullptr;
+	Object* left = nullptr;
+	Object* right = nullptr;
+	Object* back = nullptr;
+	Object* front = nullptr;
 };
