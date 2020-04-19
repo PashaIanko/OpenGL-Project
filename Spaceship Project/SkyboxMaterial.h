@@ -8,6 +8,8 @@
 * It's for rendering the object without lightning (even light sources exist in a scene).
 * For more details, see class Material.
 */
+
+//struct TextureFilenames;
 class SkyboxMaterial : public Material
 {
 public:
